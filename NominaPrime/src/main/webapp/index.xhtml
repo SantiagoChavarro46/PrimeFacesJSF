@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Calculador de Nómina</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Calculador de Nómina">
+            <p:messages autoUpdate="true" showDetail="true" />
+
+            <p:panelGrid columns="2" layout="grid" style="width: 100%">
+                <p:outputLabel for="nombre" value="Nombre:" />
+                <p:inputText id="nombre" value="#{nominaBean.nombre}" required="true" label="Nombre">
+              	<f:validateLength minimum="2" />
+                </p:inputText>
+
+                <p:outputLabel for="id" value="ID:" />
+                <p:inputText id="id" value="#{nominaBean.id}" required="true" label="ID">
+                    <f:validateLength minimum="2" />
+                </p:inputText>
+
+                <p:outputLabel for="edad" value="Edad:" />
+                <p:inputNumber id="edad" value="#{nominaBean.edad}" required="true" label="Edad">
+                    <f:validateLongRange minimum="18" maximum="70" />
+                </p:inputNumber>
+
+                <p:outputLabel for="salario" value="Salario Básico:" />
+                <p:inputNumber id="salario" value="#{nominaBean.salarioBasico}" required="true" label="Salario">
+                    <f:validateDoubleRange minimum="1000000" />
+                </p:inputNumber>
+
+                <p:outputLabel for="dias" value="Días Trabajados:" />
+                <p:inputNumber id="dias" value="#{nominaBean.dias}" required="true" label="Días">
+                    <f:validateLongRange minimum="1" maximum="30" />
+                </p:inputNumber>
+            </p:panelGrid>
+
+            <p:commandButton value="Calcular Salario" action="#{nominaBean.calcular}"
+                             update="@form" style="margin-top: 10px;" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Resultados de la Nómina</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h1>Resultados de la Nómina</h1>
+
+        <!-- Mostrar error si ocurre alguno -->
+        <p:messages id="errorMessages" showDetail="true" showSummary="true" autoUpdate="true" />
+
+        <!-- Mostrar detalles del empleado -->
+        <p:panel header="Detalle del Empleado">
+            <p:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+                <h:outputLabel value="Nombre:" />
+                <h:outputText value="#{nominaBean.nomina.nombre}" />
+
+                <h:outputLabel value="ID:" />
+                <h:outputText value="#{nominaBean.nomina.id}" />
+
+                <h:outputLabel value="Salario Base:" />
+                <h:outputText value="#{nominaBean.nomina.salarioBasico}">
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+
+                <h:outputLabel value="Auxilio Transporte:" />
+                <h:outputText value="#{nominaBean.nomina.auxilioTransporte}">
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+
+                <h:outputLabel value="Descuento Salud:" />
+                <h:outputText value="#{nominaBean.nomina.salud}">
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+
+                <h:outputLabel value="Descuento Pensión:" />
+                <h:outputText value="#{nominaBean.nomina.pension}">
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+
+                <h:outputLabel value="Salario Neto:" />
+                <h:outputText value="#{nominaBean.salarioTotal}">
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:panelGrid>
+        </p:panel>
+
+        <!-- Tabla de historial de nómina -->
+        <p:panel header="Historial de Nómina">
+            <p:dataTable value="#{nominaBean.historialNominas}" var="n" rows="10" paginator="true">
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{n.nombre}" />
+                </p:column>
+                <p:column headerText="ID">
+                    <h:outputText value="#{n.id}" />
+                </p:column>
+                <p:column headerText="Salario Base">
+                    <h:outputText value="#{n.salarioBasico}">
+                        <f:convertNumber type="currency" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Salario Neto">
+                    <h:outputText value="#{n.calcularSalario()}">
+                        <f:convertNumber type="currency" />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+
+        <!-- Botón para regresar -->
+        <p:button value="Volver" outcome="index" style="margin-top: 10px;" />
+    </h:form>
+</h:body>
+</html>
